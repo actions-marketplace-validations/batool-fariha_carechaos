@@ -1,0 +1,27 @@
+{
+  "name": "Regional endpoint failure: alert queue recovery",
+  "scenario": "alert-service-outage",
+  "seed": 20251019,
+  "eventCount": 200,
+  "intervalSec": 1,
+  "durationSec": 300,
+  "mode": "resilient",
+  "pipeline": {
+    "capacities": { "processor": 15, "delivery": 6 },
+    "queueCapacity": 500,
+    "retry": { "maxRetries": 8, "baseSec": 1, "capSec": 8 },
+    "deadLetterRedrive": true
+  },
+  "faults": [
+    { "type": "outage", "target": "delivery", "startSec": 60, "durationSec": 60, "intensity": 1, "delaySec": 0 }
+  ],
+  "assertions": [
+    { "kind": "service_unavailable_during_fault", "title": "Delivery is unavailable during the simulated outage" },
+    { "kind": "no_work_during_outage", "title": "No alert is delivered while delivery is down" },
+    { "kind": "queue_visible_during_outage", "title": "Queued alerts remain visible", "params": { "min": 5 } },
+    { "kind": "processed_after_recovery", "title": "Queued alerts resume after recovery" },
+    { "kind": "recovery_time_max", "title": "The queue recovers within 60 simulated seconds", "params": { "maxSec": 60 } },
+    { "kind": "queue_drains", "title": "The queue drains after recovery" },
+    { "kind": "no_unexpected_loss", "title": "No unexplained alert loss occurs" }
+  ]
+}
