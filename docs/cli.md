@@ -32,8 +32,8 @@ By default only **resilient** runs can fail the command. The weak mode is a refe
 
 ```bash
 npm run carechaos -- init
-npm run carechaos -- validate carechaos.json
-npm run carechaos -- run carechaos.json examples/game-day.json --mode both --out reports --junit reports/junit.xml
+npm run carechaos -- validate carechaos.json examples/regional-endpoint-outage.json
+npm run carechaos -- run carechaos.json examples/game-day.json examples/regional-endpoint-outage.json --mode both --out reports --junit reports/junit.xml
 ```
 
 ```
