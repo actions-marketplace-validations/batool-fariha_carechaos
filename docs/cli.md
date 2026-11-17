@@ -55,7 +55,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: batool-fariha/carechaos@main
         with:
-          files: carechaos.json          # space-separated for several viles
+          files: carechaos.json          # space-separated for several files
           mode: resilient                # resilient | faulty | both
           strict: "false"
           junit: carechaos-junit.xml
