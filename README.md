@@ -138,6 +138,13 @@ npm run carechaos -- init                      # writes an example carechaos.jso
 npm run carechaos -- run carechaos.json --junit results.xml
 ```
 
+To try the bundled [regional-endpoint outage experiment](examples/regional-endpoint-outage.json), validate and run it locally. It simulates a 60-second delivery outage and checks that queued alerts stay visible, resume after recovery, and are not lost unexpectedly:
+
+```bash
+npm run carechaos -- validate examples/regional-endpoint-outage.json
+npm run carechaos -- run examples/regional-endpoint-outage.json
+```
+
 In GitHub Actions:
 
 ```yaml
